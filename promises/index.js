@@ -2,13 +2,13 @@ console.log("Index .js is working")
 
 
 const cart = ["Shoes", "Pants", "kurtas"]
-createOrder(function () {
-    proceedToPayment(function () {
-        orderSummary(function () {
-            updateWallet()
-        })
-    })
-})
+// createOrder(function () {
+//     proceedToPayment(function () {
+//         orderSummary(function () {
+//             updateWallet()
+//         })
+//     })
+// })
 
 // Here first we are calling create order api and pass another function which makes the payment
 // Here we give our control of code to create order function that after the completition of create order run the callback function
@@ -40,3 +40,40 @@ fetch('https://fakestoreapi.com/products')
 
 // so promise is may defined like this
 // A Promises is a object which is representation of eventually completion or failure of asynchronous operations.
+
+
+// PART - 2
+
+// Now we will create our own promise
+// Above we have seen that fetch() itself returns promise but how can we own create promise and handle all these functionalities
+
+// Creating a new Promise
+const tempPromise = new Promise((resolve, reject) => {
+    // Inside the Promise constructor, you define the asynchronous operation
+    // This could be an API call, reading a file, or any other async task
+
+    // Simulating an asynchronous operation with setTimeout
+    setTimeout(() => {
+        // For demonstration, let's say this operation is successful
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
+
+        if (randomNumber > 2) {
+            // If the operation is successful, call the resolve function
+            resolve(randomNumber);
+        } else {
+            // If the operation fails, call the reject function
+            reject(new Error('Random number is too low',randomNumber ));
+        }
+    }, 5000);
+})
+
+// Consuming the Promise
+tempPromise.then((result) => {
+    // This function is called if the Promise is resolved successfully
+    console.log('Random number is:', result);
+}).catch((error) => {
+    // This function is called if the Promise is rejected
+    console.error('Error occurred:', error);
+});
+
+console.log("But may this prints first")
