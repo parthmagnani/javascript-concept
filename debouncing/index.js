@@ -1,18 +1,28 @@
-console.log("index.js works")
-
-const person1 = {
-    firstName: "Parth",
-    lastName: "Magnani",
+let counter = 0
+const getData = (searchedValue) => {
+    // const payload  ={
+    //     search: searchedValue
+    // }
+    // console.log(payload)
+    counter++
+    console.log(counter)
+    //Now cal api
 }
 
-function fullName(city){
-    console.log(this.firstName + " " + this.lastName + " " + "lives in " + city) 
+const debounce = (fn, value, delay) => {
+    let timer
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        fn(value)
+    }, delay);
+    
+} 
+
+let timer
+const betterFunction = (event) => {
+    
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        getData(event.target.value)
+    }, 500);
 }
-
-// fullName.call(person1)
-fullName.call(person1, "ahmedabad")
-
-fullName.apply(person1, ['Ahmedabad'])
-
-const checking = fullName.bind(person1,"ahmedabad")
-checking()
